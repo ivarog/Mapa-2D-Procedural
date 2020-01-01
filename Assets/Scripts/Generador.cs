@@ -6,7 +6,10 @@ using UnityEngine.Tilemaps;
 public enum Algoritmo
 {
     PerlinNoise,
-    PerlinNoiseSuavizado
+    PerlinNoiseSuavizado,
+    RandomWalk,
+    RandomWalkSuavizado,
+    PerlinNoiseCueva
 }
 
 public class Generador : MonoBehaviour
@@ -47,6 +50,16 @@ public class Generador : MonoBehaviour
     [Header("Perlin Noise Suavizado")]
     public int intervalo = 2;
 
+    [Header("Random Walk Suavizado")]
+    public int minimoAnchoSeccion = 2;
+
+    [Header("Cuevas")]
+    public bool losBordesSonMuros = true;
+
+    [Header("Perlin Noise Cueva")]
+    public float modificador = 0.1f;
+    public float offsetX = 0.0f;
+    public float offsetY = 0.0f;
 
     public void GenerarMapa()
     {
@@ -68,7 +81,18 @@ public class Generador : MonoBehaviour
                 mapa = Metodos.GenerarArray(ancho, alto, true);
                 mapa = Metodos.PerlinNoiseSuavizado(mapa, semilla, intervalo);
                 break;
-
+            case Algoritmo.RandomWalk:
+                mapa = Metodos.GenerarArray(ancho, alto, true);
+                mapa = Metodos.RandomWalk(mapa, semilla);
+                break;
+            case Algoritmo.RandomWalkSuavizado:
+                mapa = Metodos.GenerarArray(ancho, alto, true);
+                mapa = Metodos.RandomWalkSuavizado(mapa, semilla, minimoAnchoSeccion);
+                break;
+            case Algoritmo.PerlinNoiseCueva:
+                mapa = Metodos.GenerarArray(ancho, alto, false);
+                mapa = Metodos.PerlinNoiseCueva(mapa, modificador, losBordesSonMuros, offsetX, offsetY, semilla);
+                break;
         }
 
         Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta);

@@ -107,4 +107,104 @@ public class Metodos
 
         return mapa;
     }
+
+    public static int[,] RandomWalk(int[,] mapa, float semilla)
+    {
+        //La semilla de nuestro random
+        Random.InitState(semilla.GetHashCode());
+
+        //Establecemos la altura inicial
+        int ultimaAltura = Random.Range(0, mapa.GetUpperBound(1));
+
+        //Recorremos todo el mapa a lo ancho
+        for(int x = 0; x < mapa.GetUpperBound(0); x++)
+        {
+            //0 sube 1 baja 2 igual
+            int siguienteMovimiento = Random.Range(0, 3);
+
+            if(siguienteMovimiento == 0 && ultimaAltura < mapa.GetUpperBound(1))
+            {
+                ultimaAltura++;
+            }
+            else if(siguienteMovimiento == 1 && ultimaAltura > 0)
+            {
+                ultimaAltura--;
+            }
+
+            for(int y = ultimaAltura; y >= 0; y--)
+            {
+                mapa[x, y] = 1;
+            }
+        }
+
+        return mapa;
+
+    }
+
+    public static int[,] RandomWalkSuavizado(int[,] mapa, float semilla, int minimoAnchoSeccion)
+    {
+         //La semilla de nuestro random
+        Random.InitState(semilla.GetHashCode());
+
+        //Establecemos la altura inicial
+        int ultimaAltura = Random.Range(0, mapa.GetUpperBound(1));
+
+        //Para llevar la cuenta
+        int anchoSeccion = 0;
+
+        //Recorremos todo el mapa a lo ancho
+        for(int x = 0; x < mapa.GetUpperBound(0); x++)
+        {
+            if(anchoSeccion >= minimoAnchoSeccion)
+            {
+                //0 sube 1 baja 2 igual
+                int siguienteMovimiento = Random.Range(0, 3);
+
+                if(siguienteMovimiento == 0 && ultimaAltura < mapa.GetUpperBound(1))
+                {
+                    ultimaAltura++;
+                }
+                else if(siguienteMovimiento == 1 && ultimaAltura > 0)
+                {
+                    ultimaAltura--;
+                }
+
+                anchoSeccion = 0;
+            }
+
+            anchoSeccion++;
+
+            //Relleno del suelo
+            for(int y = ultimaAltura; y >= 0; y--)
+            {
+                mapa[x, y] = 1;
+            }
+        }
+
+        return mapa;
+    }
+
+    public static int[,] PerlinNoiseCueva(int[,] mapa, float modificador, bool losBordesSonMuros, float offsetX = 0.0f, float offfsetY =0.0f, float semilla = 0.0f)
+    {
+        int nuevoPunto;
+
+        for(int x = 0; x < mapa.GetUpperBound(0); x++)
+        {
+            for(int y = 0; y < mapa.GetUpperBound(1); y++)
+            {
+                if(losBordesSonMuros && (x == 0 || y == 0 || x == mapa.GetUpperBound(0) - 1 || y == mapa.GetUpperBound(1) - 1))
+                {
+                    mapa[x, y] = 1;
+                }
+                else
+                {
+                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * modificador + offsetX + semilla, y * modificador + offfsetY + semilla));
+                    mapa[x, y] = nuevoPunto;
+                }
+            }
+        }
+
+        return mapa;
+    }
+
 }
