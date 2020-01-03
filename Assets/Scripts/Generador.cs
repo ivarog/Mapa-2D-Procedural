@@ -14,7 +14,8 @@ public enum Algoritmo
     TunelDireccional,
     MapaAleatorio,
     AutomataCelularMoore,
-    AutomataCelularVonNeumann
+    AutomataCelularVonNeumann,
+    Combinado
 }
 
 public class Generador : MonoBehaviour
@@ -84,10 +85,15 @@ public class Generador : MonoBehaviour
     public float porcentajeDeRelleno = 0.45f;
     public int totalDePasadas = 3;
 
+    [Header("Combinado")]
+    public int altoSuperficie = 20;
+
     public void GenerarMapa()
     {
         mapaDeLosetas.ClearAllTiles();
         int[,] mapa = null; 
+        int[,] mapaSuperficie = null; 
+        int[,] mapaGeneral = null;
 
         if(semillaAleatoria)
         {
@@ -135,9 +141,18 @@ public class Generador : MonoBehaviour
                 mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
                 mapa = Metodos.AutomataCelularVonNeumann(mapa, totalDePasadas, losBordesSonMuros);
                 break;
+            case Algoritmo.Combinado:
+                mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
+                mapaSuperficie = Metodos.GenerarMapaAleatorio(ancho, altoSuperficie, semilla, 0.0f, false);
+                mapa = Metodos.PerlinNoiseCueva(mapa, modificador, losBordesSonMuros, offsetX, offsetY, semilla);
+                mapaSuperficie = Metodos.PerlinNoiseSuavizado(mapaSuperficie, semilla, intervalo);
+                mapaGeneral = Metodos.JuntarArreglos(mapa, mapaSuperficie);
+                mapaGeneral = Metodos.TunelDireccional(mapaGeneral, semilla, anchoMinimo, anchoMaximo, aspereza, desplazamientoMaximo, desplazamiento);
+                break;
         }
 
-        Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta);
+        Metodos.GenerarMapa(mapaGeneral, mapaDeLosetas, loseta, 0);
+        
 
         // = Metodos.GenerarArray(ancho, alto, false);
         // Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta);

@@ -18,7 +18,7 @@ public class Metodos
         return mapa;
     }
 
-    public static void GenerarMapa(int[,] mapa, Tilemap mapaDeLosetas, TileBase loseta)
+    public static void GenerarMapa(int[,] mapa, Tilemap mapaDeLosetas, TileBase loseta, int offset)
     {
         mapaDeLosetas.ClearAllTiles();
 
@@ -28,7 +28,7 @@ public class Metodos
             {
                 if(mapa[x, y] == 1)
                 {
-                    mapaDeLosetas.SetTile(new Vector3Int(x, y, 0), loseta);
+                    mapaDeLosetas.SetTile(new Vector3Int(x, y + offset, 0), loseta);
                 }
             }
         }
@@ -411,5 +411,28 @@ public class Metodos
             }
         }
         return mapa;
+    }
+
+    public static int[,] JuntarArreglos(int[,] arreglo1, int[,] arreglo2)
+    {
+        int dimensionY = arreglo1.GetUpperBound(1) + arreglo2.GetUpperBound(1);
+        int dimensionX = arreglo1.GetUpperBound(0);
+        int[,] resultado = new int[dimensionX, dimensionY];
+
+        for(int x = 0; x < dimensionX; x++)
+        {
+            for(int y = 0; y < dimensionY; y++)
+            {
+                if(y <= arreglo1.GetUpperBound(1))
+                {
+                    resultado[x, y] = arreglo1[x, y];
+                }
+                else
+                {
+                    resultado[x, y] = arreglo2[x, y - arreglo1.GetUpperBound(1)];
+                }
+            }
+        }
+        return resultado;
     }
 }
