@@ -52,12 +52,6 @@ Este generador hace uso del autómata celular de Moore, el resultado crea cuevas
 
 ![](Capturas/AutomataCelularMoore.JPG)
 
-_Autómata Celular Moore_
-
-Este generador hace uso del autómata celular de Moore, el resultado crea cuevas más naturales y agradables a la vista.
-
-![](Capturas/AutomataCelularMoore.JPG)
-
 _Autómata Celular Von Neumann_
 
 Este generador hace uso del autómata celular de Von Neumann, el resultado crea cuevas con un estilo pixelado o cuadrado.
