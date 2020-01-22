@@ -71,9 +71,10 @@ Para modificar el proyecto es necesario contar con la versión de Unity 2018.4 o
 Los Script principales se encuentran en:
 
 Assets\Scripts\Generador.cs
+
 Assets\Scripts\Metodos.cs
 
-Para simular el comportamineto de los algoritmos con el proyecto de Unity ya abierto dar click en el objeto generador de la escena y en el inspector modificar los parámetros. Existen botones tanto para generar como para limpiar el mapa.
+Para simular el comportamineto de los algoritmos con el proyecto de Unity ya abierto, dar click en el objeto generador de la escena y en el inspector modificar los parámetros. Existen botones tanto para generar como para limpiar el mapa.
 
 ![](Capturas/Parametros.JPG)
 
