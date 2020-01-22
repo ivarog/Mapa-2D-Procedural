@@ -148,11 +148,11 @@ public class Generador : MonoBehaviour
                 mapaSuperficie = Metodos.PerlinNoiseSuavizado(mapaSuperficie, semilla, intervalo);
                 mapaGeneral = Metodos.JuntarArreglos(mapa, mapaSuperficie);
                 mapaGeneral = Metodos.TunelDireccional(mapaGeneral, semilla, anchoMinimo, anchoMaximo, aspereza, desplazamientoMaximo, desplazamiento);
+                Metodos.GenerarMapa(mapaGeneral, mapaDeLosetas, loseta, 0);
                 break;
         }
 
-        Metodos.GenerarMapa(mapaGeneral, mapaDeLosetas, loseta, 0);
-        
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
 
         // = Metodos.GenerarArray(ancho, alto, false);
         // Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta);
