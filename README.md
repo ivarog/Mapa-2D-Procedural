@@ -8,7 +8,7 @@ _Perlin Noise_
 
 Este algoritmo permite generar terrenos haciendo el uso del ruido Perlin, el resultado nos da una crestas altas, útiles para simular elevaciones de terreno pero que no se sienten del todo naturales.
 
-![](Capturas/PerlinNoise.JPG)
+![](Capturas/PerlinNoise.JPG?raw=true "Title"))
 
 _Perlin Noise Suavizado_
 
