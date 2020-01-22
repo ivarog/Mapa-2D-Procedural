@@ -105,41 +105,51 @@ public class Generador : MonoBehaviour
             case Algoritmo.PerlinNoise:
                 mapa = Metodos.GenerarArray(ancho, alto, true);
                 mapa = Metodos.PerlinNoise(mapa, semilla);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.PerlinNoiseSuavizado:
                 mapa = Metodos.GenerarArray(ancho, alto, true);
                 mapa = Metodos.PerlinNoiseSuavizado(mapa, semilla, intervalo);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.RandomWalk:
                 mapa = Metodos.GenerarArray(ancho, alto, true);
                 mapa = Metodos.RandomWalk(mapa, semilla);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.RandomWalkSuavizado:
                 mapa = Metodos.GenerarArray(ancho, alto, true);
                 mapa = Metodos.RandomWalkSuavizado(mapa, semilla, minimoAnchoSeccion);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.PerlinNoiseCueva:
                 mapa = Metodos.GenerarArray(ancho, alto, false);
                 mapa = Metodos.PerlinNoiseCueva(mapa, modificador, losBordesSonMuros, offsetX, offsetY, semilla);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.RandomWalkCueva:
                 mapa = Metodos.GenerarArray(ancho, alto, false);
                 mapa = Metodos.RandomWalkCueva(mapa, semilla, porcentajeAEliminar, losBordesSonMuros, movimientoEnDiagonal);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.TunelDireccional:
                 mapa = Metodos.GenerarArray(ancho, alto, false);
                 mapa = Metodos.TunelDireccional(mapa, semilla, anchoMinimo, anchoMaximo, aspereza, desplazamientoMaximo, desplazamiento);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.MapaAleatorio:
                 mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.AutomataCelularMoore:
                 mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
                 mapa = Metodos.AutomataCelularMoore(mapa, totalDePasadas, losBordesSonMuros);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.AutomataCelularVonNeumann:
                 mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
                 mapa = Metodos.AutomataCelularVonNeumann(mapa, totalDePasadas, losBordesSonMuros);
+                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
                 break;
             case Algoritmo.Combinado:
                 mapa = Metodos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeDeRelleno, losBordesSonMuros);
@@ -152,7 +162,6 @@ public class Generador : MonoBehaviour
                 break;
         }
 
-                Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta, 0);
 
         // = Metodos.GenerarArray(ancho, alto, false);
         // Metodos.GenerarMapa(mapa, mapaDeLosetas, loseta);
